@@ -7,7 +7,9 @@
 
 
 ## Firmware Progression
-- Start writing the microcontroller code, focusing on the logic that enables the robot car to move parallel to the wall while maintaining a fixed distance using an ultrasonic  sensor and a PID controller. Determine how these components will work together to accomplish the task.
+- Start writing the microcontroller code, focusing on the logic that enables the robot car to move parallel to the wall while maintaining a fixed distance using an ultrasonic  sensor and a PID controller.
+
+-  Determine how these components will work together to accomplish the task.
 
 - Study the connections between the sensors and the microcontroller to ensure proper integration.
 
