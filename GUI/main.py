@@ -6,6 +6,8 @@ import cv2
 import os
 from MainWindow_UI import Ui_MainWindow
 from VideoStitching_backend import VideoStitching
+from StereoVision_backend import StereoVision
+import carControl
 
 class Window(QMainWindow):
     def __init__(self):
@@ -19,16 +21,20 @@ class Window(QMainWindow):
         self.ui.stop_pushButton.clicked.connect(self.stop_camera_feed)
         self.ui.screenshot_pushButton.clicked.connect(self.screen_shot)
         self.ui.videoStitching_pushButton.clicked.connect(self.open_videoStitching)
+        self.ui.StereoVision_pushButton.clicked.connect(self.open_StereoVision)
         self.ui.autonomus_mode_pushButton.clicked.connect(self.set_mode_auto)
         self.ui.manual_mode_pushButton.clicked.connect(self.set_mode_manual)
         self.ui.high_speed_pushButton.clicked.connect(self.set_speed_high)
         self.ui.medium_speed_pushButton.clicked.connect(self.set_speed_medium)
         self.ui.low_speed_pushButton.clicked.connect(self.set_speed_low)
 
-        # Keep track of video stitching window to avoid opening multiple instances
+        # Keep track of dialog windows to avoid opening multiple instances
         self.video_stitching_window = None
+        self.stereo_vision_window = None
 
-
+    def forward(self):
+        carControl.forward()
+    
     def set_mode_auto(self):
         self.ui.mode_reading.setStyleSheet("background-color:rgb(0,255,0);\ncolor:#090f13;\nborder-radius:15px;")
         self.ui.mode_reading.setText("A")
@@ -84,10 +90,23 @@ class Window(QMainWindow):
         else:
             self.video_stitching_window.raise_()  # Bring the dialog to the front
 
+    def open_StereoVision(self):
+        # Check if the dialog is already open
+        if self.stereo_vision_window is None:
+            # Instantiate the video stitching dialog
+            self.stereo_vision_window = StereoVision()
+
+        if not self.stereo_vision_window.isVisible():
+            self.stereo_vision_window.show()
+        else:
+            self.stereo_vision_window.raise_()  # Bring the dialog to the front
+
     def closeEvent(self, event):
-        # Clean up video stitching window when the main window is closed
+        # Clean up dialog windows when the main window is closed
         if self.video_stitching_window:
             self.video_stitching_window.close()
+        if self.stereo_vision_window:
+            self.stereo_vision_window.close()
         event.accept()
 
 
