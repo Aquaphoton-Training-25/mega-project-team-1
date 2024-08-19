@@ -7,7 +7,7 @@ import os
 from MainWindow_UI import Ui_MainWindow
 from VideoStitching_backend import VideoStitching
 from StereoVision_backend import StereoVision
-import carControl
+#import carControl
 
 class Window(QMainWindow):
     def __init__(self):
@@ -32,8 +32,8 @@ class Window(QMainWindow):
         self.video_stitching_window = None
         self.stereo_vision_window = None
 
-    def forward(self):
-        carControl.forward()
+    #def forward(self):
+        #carControl.forward()
     
     def set_mode_auto(self):
         self.ui.mode_reading.setStyleSheet("background-color:rgb(0,255,0);\ncolor:#090f13;\nborder-radius:15px;")
